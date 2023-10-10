@@ -1,0 +1,29 @@
+class Solution {
+    public int minimumSum(int n, int k) {
+        HashSet<Integer>H=new HashSet<>();
+        int i=1;
+        while(H.size()<n){
+            int substraction=k-i;
+            if(!H.contains(substraction)){
+                H.add(i);
+            }
+            i++;
+        }
+        int sum = 0;
+        for(int num:H){
+            sum+=num;
+        }
+        return sum;
+
+       //  // Iterate through the HashSet using an Iterator
+       //  Iterator<Integer> iterator = H.iterator();
+       //  while (iterator.hasNext())
+       //  {
+       //      int num = iterator.next();
+       //      sum += num;
+       //  }
+       // return sum;
+        
+    }
+}
+        
