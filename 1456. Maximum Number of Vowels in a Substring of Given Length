@@ -1,0 +1,30 @@
+class Solution {
+    public int maxVowels(String s, int K) {
+        char[] c = s.toCharArray();
+        int[] arr = new int[s.length() - K + 1];
+        int count = 0;
+        int max = 0;  // Changed from Integer.MIN_VALUE
+
+        for (int i = 0; i < K; i++) {
+            if (c[i] == 'a' || c[i] == 'e' || c[i] == 'i' || c[i] == 'o' || c[i] == 'u') {
+                count++;
+            }
+        }
+
+        max = Math.max(count, max);
+
+        for (int j = K; j < c.length; j++) {
+            if (c[j - K] == 'a' || c[j - K] == 'e' || c[j - K] == 'i' || c[j - K] == 'o' || c[j - K] == 'u') {
+                count--;
+            }
+
+            if (c[j] == 'a' || c[j] == 'e' || c[j] == 'i' || c[j] == 'o' || c[j] == 'u') {
+                count++;
+            }
+
+            max = Math.max(count, max);
+        }
+
+        return max;
+    }
+}
