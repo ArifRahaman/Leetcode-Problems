@@ -1,0 +1,30 @@
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode prev = dummy;
+
+        // Move prev to the node just before the sublist to be reversed
+        for (int i = 0; i < left - 1; i++) {
+            prev = prev.next;
+        }
+
+        ListNode current = prev.next;
+        ListNode previous = null;
+        ListNode tail = current; // The tail of the sublist to be reversed
+
+        // Reverse the sublist from left to right
+        for (int i = 0; i < right - left + 1; i++) {
+            ListNode temp = current.next;
+            current.next = previous;
+            previous = current;
+            current = temp;
+        }
+
+        // Adjust the pointers to connect the reversed sublist back into the main list
+        prev.next = previous;
+        tail.next = current;
+
+        return dummy.next;
+    }
+}
