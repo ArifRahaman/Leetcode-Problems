@@ -1,0 +1,13 @@
+ Number of 1 Bitspublic class Solution {
+
+    public int hammingWeight(int n) {
+        int count=0;
+        int i=32;
+        while(i>0){
+            if((n&1)==1) count++;
+            n>>=1;
+            i--;
+        }
+        return count;
+    }
+}
