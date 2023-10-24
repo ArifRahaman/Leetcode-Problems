@@ -1,0 +1,66 @@
+
+class Solution {
+    public String pushDominoes(String str) {
+        int n = str.length();
+        char[] ch = new char[n + 2];
+        ch[0] = 'L';
+        ch[n + 1] = 'R';
+        for (int i = 1; i < ch.length - 1; i++) {
+            ch[i] = str.charAt(i - 1);
+        }
+
+        int j = 0;
+        int k = 1;
+        while (k < ch.length) {
+            while (ch[k] == '.') {
+                k++;
+            }
+            solve(ch, j, k);
+            j = k;
+            k++;
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (int i = 1; i < ch.length - 1; i++) {
+            res.append(ch[i]);
+        }
+        return res.toString();
+    }
+
+    static void solve(char[] ch, int j, int k) {
+        if (ch[j] == 'L' && ch[k] == 'R') {
+            return;
+        }
+        if (ch[j] == 'R' && ch[k] == 'R') {
+            for (int i = j + 1; i < k; i++) {
+                ch[i] = 'R';
+            }
+        } else if (ch[j] == 'L' && ch[k] == 'L') {
+            for (int i = j + 1; i < k; i++) {
+                ch[i] = 'L';
+            }
+        } else {
+            int diff = k - j;
+            int mid = (j + k) / 2;
+            
+            // For even
+            if (diff % 2 == 0) {
+                for (int i = j + 1; i < mid; i++) {
+                    ch[i] = 'R';
+                }
+                for (int i = mid + 1; i < k; i++) {
+                    ch[i] = 'L';
+                }
+            }
+            // For odd
+            if (diff % 2 == 1) {
+                for (int i = j + 1; i <= mid; i++) {
+                    ch[i] = 'R';
+                }
+                    for (int i = mid + 1; i < k; i++) {
+                    ch[i] = 'L';
+                }
+            }
+        }
+    }
+}
