@@ -1,0 +1,29 @@
+class Solution {
+    public int minOperations(int[] nums) {
+        
+        int n = nums.length;
+        int ans = 0;
+
+        Map<Integer, Integer> mp = new HashMap<>();
+        for (int num : nums) {
+            mp.put(num, mp.getOrDefault(num, 0) + 1);
+        }
+
+        for (var e: mp.entrySet()) {
+            int freq = e.getValue();
+            if (freq == 1) {
+                return -1;
+            }
+
+            int rem = freq % 3;  // possible rem can be 0, 1, or 2
+            int quo = freq / 3;
+            ans += quo;
+
+            if (rem == 1 || rem == 2) {
+                ans++;
+            }
+        }
+
+        return ans;
+    }
+}
