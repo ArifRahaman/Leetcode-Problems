@@ -1,0 +1,79 @@
+class Solution {
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        // Your code here
+        // if(m[0][0]==1 && m[0][1]==0 && m[1][0]==1 &&m[1][1]==0 ){
+        //     return -1;
+        // }
+
+        ArrayList<String>A=new ArrayList<>();
+                 if(m[0][0]==0 || m[n-1][n-1]==0)
+            return A;
+        print(0,0,n-1,n-1,"",m,A);
+        return A;
+        
+    }
+    
+//      static void print(int sr,int sc,int er,int ec,String s,int[][]maze,ArrayList<String>A){
+    
+//   if(sc>ec ||sr>er){
+//     return ;
+//   }
+//      if(sr<0 || sc<0){
+//         return;
+//     }
+//      if(sr==er && sc==ec){
+//         // System.out.println(s);
+//         A.add(s);
+//         // System.out.println("count: "+ count);
+//         return;
+//     }
+//     if(maze[sr][sc]==0)return;
+//     if(maze[sr][sc]==-1) return;
+    
+   
+//     maze[sr][sc]=-1;
+  
+//     // isVisited[sr][sc]=true;
+//           //Going right
+//           print(sr,sc+1,er,ec,s+"R",maze,A);
+//           //Going left
+//           print(sr,sc-1,er,ec,s+"L",maze,A);
+//           //Going up
+//           print(sr-1,sc,er,ec,s+"U",maze,A);
+//           //Going down
+//           print(sr+1,sc,er,ec,s+"D",maze,A);
+//           maze[sr][sc]=1;
+
+//       }
+    static void print(int sr, int sc, int er, int ec, String s, int[][] maze, ArrayList<String> A) {
+        if (sc > ec || sr > er) {
+            return;
+        }
+        if (sr < 0 || sc < 0) {
+            return;
+        }
+        if (sr == er && sc == ec) {
+            A.add(s);
+            return;
+        }
+        if (maze[sr][sc] == 0) {
+            return;
+        }
+        if (maze[sr][sc] == -1) {
+            return;
+        }
+
+        maze[sr][sc] = -1;
+
+        // Going right
+        print(sr, sc + 1, er, ec, s + "R", maze, A);
+        // Going left
+        print(sr, sc - 1, er, ec, s + "L", maze, A);
+        // Going up
+        print(sr - 1, sc, er, ec, s + "U", maze, A);
+        // Going down
+        print(sr + 1, sc, er, ec, s + "D", maze, A);
+
+        maze[sr][sc] = 1;
+    }
+}
