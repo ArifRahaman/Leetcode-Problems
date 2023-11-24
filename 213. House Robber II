@@ -1,0 +1,40 @@
+class Solution {
+    public int rob(int[] nums) {
+        return solvedp(nums);
+    }
+    static int solvedp(int[]nums){
+        int n=nums.length;
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return nums[0];
+        }
+
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+
+        for (int i = 2; i < n - 1; i++) {
+            int include = dp[i - 2] + nums[i];
+            int exclude = dp[i - 1];
+            dp[i] = Math.max(include, exclude);
+        }
+
+        int maxSumExcludingFirst = dp[n - 2];
+
+        // Reset dp array for the second pass
+        dp[0] = 0;
+        dp[1] = nums[1];
+
+        for (int i = 2; i < n; i++) {
+            int include = dp[i - 2] + nums[i];
+            int exclude = dp[i - 1];
+            dp[i] = Math.max(include, exclude);
+        }
+
+        int maxSumExcludingLast = dp[n - 1];
+
+        return Math.max(maxSumExcludingFirst, maxSumExcludingLast);
+    }
+    
+}
