@@ -1,0 +1,37 @@
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int multi = 1;
+        int n = nums.length;
+        int[] answerarray = new int[n];
+        Arrays.fill(answerarray, 0);
+        int zero = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                zero++;
+            }
+        }
+        if (zero >= 2)
+            return answerarray;
+        boolean isTrue = false;
+
+        for (int k = 0; k < nums.length; k++) {
+            if (nums[k] != 0)
+                multi *= nums[k];
+            else
+                isTrue = true;
+        }
+
+        for (int k = 0; k < nums.length; k++) {
+            if (nums[k] != 0 && !isTrue)
+                answerarray[k] = multi / nums[k];
+            else if (nums[k] != 0 && isTrue) {
+                continue;
+            } else {
+                answerarray[k] = multi;
+            }
+        }
+
+        return answerarray;
+    }
+}
