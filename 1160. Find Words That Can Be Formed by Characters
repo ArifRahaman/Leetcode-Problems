@@ -1,0 +1,28 @@
+import java.util.*;
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+       int[]all=new int[26];
+        for(int i=0;i<chars.length();i++){
+            all[chars.charAt(i)-'a']++;
+        }
+        int length12=0;
+        for(String s: words){
+            boolean Checkplease=check(s,all);
+            if(Checkplease) length12+=s.length();
+            
+        }
+        return length12;
+    }
+    static boolean check(String s, int[]all){
+        int[]newall1=new int[26];
+        for(int i=0;i<s.length();i++){
+            int a=s.charAt(i)-'a';
+            newall1[a]++;
+            if(newall1[a]>all[a]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
