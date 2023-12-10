@@ -1,0 +1,18 @@
+class Solution {
+    public int removeAlmostEqualCharacters(String word) {
+        int i=0;
+        int count=0;
+        while(i<word.length()-1){
+            int a=word.charAt(i)-'a';
+            int b=word.charAt(i+1)-'a';
+            if(Math.abs(a-b)<=1){
+                count++;
+                i=i+2;
+            }
+            else{
+                i=i+1;
+            }
+        }
+        return count;
+    }
+}
