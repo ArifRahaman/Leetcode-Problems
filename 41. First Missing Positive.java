@@ -1,3 +1,4 @@
+// Hard rated
 class Solution {
     public int firstMissingPositive(int[] nums) {
         Set<Integer> set = new HashSet<>();
